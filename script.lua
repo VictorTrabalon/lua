@@ -92,4 +92,15 @@ local function updateESP()
 end
 
 -- Update ESP every frame
-game:GetService("RunService").
+game:GetService("RunService").RenderStepped:Connect(function()
+    if isEnabled then
+        updateESP()
+    end
+end)
+
+-- Toggle ESP with 'Z' key
+game:GetService("UserInputService").InputBegan:Connect(function(input)
+    if input.KeyCode == Enum.KeyCode.Z then
+        isEnabled = not isEnabled
+    end
+end)
